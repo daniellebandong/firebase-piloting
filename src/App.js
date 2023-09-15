@@ -1,9 +1,12 @@
 
 
+import LoginForm from "./components/forms/Login";
+import RegisterForm from "./components/forms/Register";
+
 function App() {
   return (
     <div className="App">
-      <h1>Hello World</h1>
+      <LoginForm/>
     </div>
   );
 }
