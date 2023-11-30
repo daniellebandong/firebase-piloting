@@ -1,24 +1,47 @@
-import { Link } from "react-router-dom";
-import { useState, useEffect, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-import AuthContext from "../../auth/AuthContext";
-import {db, app} from "../../firebaseconfig"
+//import AuthContext from "../../auth/AuthContext";
+
 
 //import { PrimaryButton } from "../buttons/Buttons";
 
-
+//TODO: COME UP WITH REGEX PATTERN FOR PASSWORD AS WELL AS CREATE PASSWORD LENGTH REQUIREMENTS
 const RegisterForm = () => {
-    const auth = useContext(AuthContext);
+    const auth = getAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [ user, setUser] = useState('');
+    const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+    //const passwordRegex = 
+    const isEmailValid = emailRegex.test(email);
+    const navigate = useNavigate;
 
     const onSubmit = async (e) =>{
         e.preventDefault();
-        // console.log(user)
-        // console.log(password)
-        // console.log(email)
-        app.createUserWithEmailAndPassword(email, password)
+        //if an invalid email is entered throw an error
+        if(!isEmailValid){
+            console.error("Invalid email address")
+            //still need to display error message to the user
+        }
+        //if email address is blank, throw error message
+        if(email == " "){
+            console.error("Email address is required")
+            //also doesnt display error message to the user yet
+        }
+        else{
+            createUserWithEmailAndPassword(auth, email, password)
+            .then(userCredential =>{
+                const user = userCredential.user
+                alert("User account created successfully, redirecting to login page")
+                return navigate("/login")
+                console.log(user) //works! test@test.com was listed as an email address
+            })
+            .catch(error=>{
+                const errorCode = error.code
+                const errorMessage = error.message
+                console.error(errorCode,errorMessage)
+            })
+        }
         
     }
 
@@ -29,10 +52,6 @@ const RegisterForm = () => {
                 <div className="">
                     <label htmlFor="" className="mx-1">Email address</label>
                     <input type="text" required className="border p-1 rounded w-full" onChange={(e)=> setEmail(e.target.value.trim())}/>
-                </div>
-                <div className="">
-                    <label htmlFor="" className="mx-1">Username</label>
-                    <input type="text" required className="border p-1 rounded w-full" onChange={(e)=> setUser(e.target.value.trim())}/>
                 </div>
                 <div className="">
                     <label htmlFor="" className="mx-1">Password</label>
