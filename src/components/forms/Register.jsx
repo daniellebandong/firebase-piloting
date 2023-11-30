@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useState, useEffect, useContext } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 import AuthContext from "../../auth/AuthContext";
-import firebaseApp from "../../firebaseconfig";
+import {db, app} from "../../firebaseconfig"
 
 //import { PrimaryButton } from "../buttons/Buttons";
 
@@ -18,10 +18,8 @@ const RegisterForm = () => {
         // console.log(user)
         // console.log(password)
         // console.log(email)
-        firebaseApp.auth().createUserWithEmailAndPassword(auth, email,password)
-        .then(userCredential=>{
-            console.log(userCredential.user)
-        })
+        app.createUserWithEmailAndPassword(email, password)
+        
     }
 
     return ( 
