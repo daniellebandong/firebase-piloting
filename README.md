@@ -1,3 +1,9 @@
+- need to decide what data i am storing, if I have time I can create an add employee page but will probably manually enter user information into a database within firebase
+- need to create small dashboard, maybe show XSS as a vulnerability due to only having email and password for validation
+- need matching password validation alongside adding users
+- need to create login method for firebase
+- 
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
