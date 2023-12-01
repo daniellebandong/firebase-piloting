@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, redirect } from "react-router-dom";
 import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 //import AuthContext from "../../auth/AuthContext";
@@ -14,7 +14,7 @@ const RegisterForm = () => {
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     //const passwordRegex = 
     const isEmailValid = emailRegex.test(email);
-    const navigate = useNavigate;
+    const [isValid, setIsValid] = useState('false')
 
     const onSubmit = async (e) =>{
         e.preventDefault();
@@ -24,17 +24,18 @@ const RegisterForm = () => {
             //still need to display error message to the user
         }
         //if email address is blank, throw error message
-        if(email == " "){
+        if(email === " "){
             console.error("Email address is required")
             //also doesnt display error message to the user yet
-        }
+        }           
         else{
             createUserWithEmailAndPassword(auth, email, password)
             .then(userCredential =>{
+                setIsValid(true) 
                 const user = userCredential.user
                 alert("User account created successfully, redirecting to login page")
-                return navigate("/login")
-                console.log(user) //works! test@test.com was listed as an email address
+                return redirect('/login')
+                //works! test@test.com was listed as an email address
             })
             .catch(error=>{
                 const errorCode = error.code
@@ -42,6 +43,7 @@ const RegisterForm = () => {
                 console.error(errorCode,errorMessage)
             })
         }
+        
         
     }
 
