@@ -42,8 +42,13 @@ const LoginForm = () => {
                 </div>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded border border-blue-700 my-1" onClick={onSubmit}>Login</button>
                 {/* error message div */}
-                <div>
-                    
+                <div role="alert">
+                    <div className="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+                        Danger
+                    </div>
+                    <div className="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                        <p>Something not ideal might be happening.</p>
+                    </div>
                 </div>
                 <p>Don't have an account, click <Link className="hover:cursor hover:underline" to={"/login"}>here</Link> to register for one now!</p>
                 
