@@ -14,7 +14,7 @@ const RegisterForm = () => {
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     //const passwordRegex = 
     const isEmailValid = emailRegex.test(email);
-    const navigate = useNavigate();
+    const navigate = useNavigate;
 
     const onSubmit = async (e) =>{
         e.preventDefault();
@@ -24,7 +24,7 @@ const RegisterForm = () => {
             //still need to display error message to the user
         }
         //if email address is blank, throw error message
-        if(email === " "){
+        if(email == " "){
             console.error("Email address is required")
             //also doesnt display error message to the user yet
         }
@@ -33,8 +33,8 @@ const RegisterForm = () => {
             .then(userCredential =>{
                 const user = userCredential.user
                 alert("User account created successfully, redirecting to login page")
-                navigate("/login")
-                //works! test@test.com was listed as an email address
+                return navigate("/login")
+                console.log(user) //works! test@test.com was listed as an email address
             })
             .catch(error=>{
                 const errorCode = error.code
@@ -63,10 +63,6 @@ const RegisterForm = () => {
                 </div>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded border border-blue-700" onClick={onSubmit}>Register</button>
             </form>
-            {/* error message div */}
-            <div>
-                
-            </div>
             <p>Already have an account? Click <Link className="hover:cursor hover:underline" to={"/login"}>here</Link> to sign in!</p>
         </div>
      );
