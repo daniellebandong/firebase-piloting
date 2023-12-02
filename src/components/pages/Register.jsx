@@ -47,7 +47,7 @@ const RegisterForm = () => {
 
     return ( 
         <div className="p-2">
-            <h1 className="text-2xl font-bold p-1 ">Very Secure Firebase App</h1>
+            <h1 className="text-2xl font-bold p-1 ">Employee Manager App Sign In</h1>
             <form action="">
                 <div className="">
                     <label htmlFor="" className="mx-1">Email address</label>

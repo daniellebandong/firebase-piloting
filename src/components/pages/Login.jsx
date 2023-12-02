@@ -30,7 +30,7 @@ const LoginForm = () => {
     return ( 
         <div className="p-2 md:w-11/12 flex">
             <div className="justify-center">
-            <h1 className="text-2xl font-bold p-1">Welcome to the Most Secure Firebase App</h1>
+            <h1 className="text-2xl font-bold p-1">Employee Manager App</h1>
             <form action="" className=" my-1">
                 <div>
                     <label htmlFor="username">Email:</label>
