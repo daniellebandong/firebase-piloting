@@ -2,11 +2,12 @@ import {useEffect, useState} from 'react'
 import { db, app } from '../../firebaseconfig'
 import { collection, getDocs, setDoc, doc } from 'firebase/firestore'
 import {getAuth, onAuthStateChanged } from 'firebase/auth'
-
+import { useNavigate } from 'react-router-dom'
 
 
 const InfoForm =() =>{
     const [buyerInfo, setBuyerInfo] = useState([])
+    const navigate = useNavigate()
     const auth = getAuth();
 
     useEffect(()=>{
@@ -29,6 +30,7 @@ const InfoForm =() =>{
             }
             else{
                 alert("You are not authenticated to access this resource")
+                navigate('/login')
             }
         })
         }
