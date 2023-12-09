@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 //import AuthContext from "../../auth/AuthContext";
-import validator from "validator";
 
 //import { PrimaryButton } from "../buttons/Buttons";
 
@@ -20,10 +19,11 @@ const RegisterForm = () => {
     const [showErrorEmail, setShowErrorEmail] = useState(false)
 
     const onSubmit = async (e) =>{
-        
+        //email validation, NEED TO ADD VALIDATION FOR ONLY SPECIFIC DOMAINS
         if(!isEmailValid){
             setShowErrorEmail('Invalid email address')
         }
+        //password validation
         if(!isValidPassword){
             setShowErrorPassword('Invalid password')
         }
