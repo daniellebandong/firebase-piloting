@@ -25,7 +25,7 @@ const InfoForm =() =>{
                 setBuyerInfo(buyerInfoData)
                 })
                 .catch((error)=>{
-                    console.error("Error fetching employee information", error)
+                    console.error("Error fetching subscriber information", error)
                 })
             }
             else{
@@ -38,17 +38,19 @@ const InfoForm =() =>{
     }, [auth])
 
 return(
-    <div>
-        <h1>Employee Information</h1>
-        <ul>
-        {buyerInfo.map((buyer) => (
-            
-            <li key={buyer.id}>
-            <strong>First Name:</strong> {buyer.FirstName}, <strong>Last Name:</strong> {buyer.LastName},<strong>Address: </strong>{buyer.Address},<strong>Date of Birth: </strong>{buyer.DOB} 
-            {/* Add more fields as needed */}
-            </li>
-        ))}
-        </ul>
+    <div className='flex justify-center'>
+        <div>
+            <h1 className='text-2xl m-2'>Subscriber Information</h1>
+            <ul>
+            {buyerInfo.map((buyer) => (
+                
+                <li key={buyer.id}>
+                <strong>First Name:</strong> {buyer.FirstName}, <strong>Last Name:</strong> {buyer.LastName},<strong>Address: </strong>{buyer.Address},<strong>Date of Birth: </strong>{buyer.DOB} 
+                {/* Add more fields as needed */}
+                </li>
+            ))}
+            </ul>
+        </div>
     </div>
 )
 

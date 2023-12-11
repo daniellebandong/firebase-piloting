@@ -10,27 +10,32 @@ const LoginForm = () => {
     const auth = getAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [isValid, SetIsValid] = useState(false);
+    const [isValid, setIsValid] = useState(false);
 
     //login with existing account
     const onSubmit =(e)=>{
         e.preventDefault()
+        if(!isValid){
+            setIsValid("Incorrect username or password")
+        }
+        else{
+            signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential)=>{
+                const user = userCredential.user
+                console.log("login successful")
+                navigate('/home')
+            })
+            .catch((error)=>{
+                const errorCode = error.code;
+                const errorMessage = error.message;
+            })
+        }
 
-        signInWithEmailAndPassword(auth, email, password)
-        .then((userCredential)=>{
-            const user = userCredential.user
-            console.log("login successful")
-            navigate('/home')
-        })
-        .catch((error)=>{
-            const errorCode = error.code;
-            const errorMessage = error.message;
-        })
     }
     return ( 
-        <div className="p-2 md:w-11/12 flex">
-            <div className="justify-center">
-            <h1 className="text-2xl font-bold p-1">Employee Manager App</h1>
+        <div className="flex justify-center p-2 md:w-11/12 ">
+            <div className="">
+            <h1 className="text-2xl font-bold p-1">Welcome to Hockey Player's r Us</h1>
             <form action="" className=" my-1">
                 <div>
                     <label htmlFor="username">Email:</label>
@@ -42,15 +47,17 @@ const LoginForm = () => {
                 </div>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded border border-blue-700 my-1" onClick={onSubmit}>Login</button>
                 {/* error message div */}
-                <div role="alert">
-                    <div className="bg-red-500 text-white font-bold rounded-t px-4 py-2">
-                        Danger
-                    </div>
-                    <div className="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
-                        <p>Something not ideal might be happening.</p>
-                    </div>
-                </div>
-                <p>Don't have an account, click <Link className="hover:cursor hover:underline" to={"/login"}>here</Link> to register for one now!</p>
+                {typeof isValid === "string" && (
+                        <div role="alert">
+                            <div className="bg-red-500 text-white font-bold rounded-t px-4 py-2">
+                                Warning
+                            </div>
+                            <div className="border border-t-0 border-red-400 rounded-b bg-red-100 px-4 py-3 text-red-700">
+                                <p>{isValid}</p>
+                            </div>
+                        </div>
+                    )}
+                <p>Don't have an account, click <Link className="hover:cursor hover:underline" to={"/register"}>here</Link> to register for one now!</p>
                 
             </form>
             </div>

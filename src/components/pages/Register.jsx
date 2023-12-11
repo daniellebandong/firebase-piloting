@@ -17,16 +17,30 @@ const RegisterForm = () => {
     const navigate = useNavigate();
     const [showErrorPassword, setShowErrorPassword] = useState(false);
     const [showErrorEmail, setShowErrorEmail] = useState(false)
+    const allowedDomains = ["gmail.com", "hotmail.com", "yahoo.com", "outlook.ca", "shaw.ca"];
 
     const onSubmit = async (e) =>{
+        e.preventDefault()
         //email validation, NEED TO ADD VALIDATION FOR ONLY SPECIFIC DOMAINS
-        if(!isEmailValid){
-            setShowErrorEmail('Invalid email address')
+        if (!isEmailValid || email === '') {           
+            setShowErrorEmail('Invalid email address');
+            setEmail('')         
+          } 
+        const [, domain] = email.split('@');
+        if (!allowedDomains.includes(domain)) {
+            
+            setShowErrorEmail('Invalid email domain. Allowed domains are: ' + allowedDomains.join(', '));
+            setEmail('')           
+            return;
         }
+        
         //password validation
         if(!isValidPassword){
+            setShowErrorEmail('')
             setShowErrorPassword('Invalid password')
+            setPassword('')
         }
+
         else{
             createUserWithEmailAndPassword(auth, email, password)
             .then(userCredential =>{
@@ -47,30 +61,26 @@ const RegisterForm = () => {
     return ( 
         <div className="flex justify-center">
             <div className="p-2 ">
-                <h1 className="text-2xl font-bold">Employee's at Firebase r Us</h1>
+                <h1 className="text-2xl font-bold p-1">Hockey Players r Us</h1>
                 <form action="">
                     <div className="">
-                        <label htmlFor="" className="mx-1">Email address</label>
-                        <input type="email" required className={"border p-1 rounded w-full"} onChange={(e) => setEmail(e.target.value.trim())} />
+                        <label  className="mx-1">Email address</label>
+                        <input type="email" required className="border p-1 rounded w-full" onChange={(e) => setEmail(e.target.value.trim())} />
                     </div>
                     <div className="">
-                        <label htmlFor="" className="mx-1">Password</label>
-                        <input type="password" required className={"border p-1 rounded w-full" }
+                        <label  className="mx-1">Password</label>
+                        <input type="password" required className="border p-1 rounded w-full" 
                         onChange={(e) => setPassword(e.target.value.trim())} />
                     </div>
                     <div className="">
-                        <label htmlFor="" className="mx-1">Confirm Password</label>
+                        <label  className="mx-1">Confirm Password</label>
                         <input type="password" required className="border p-1 rounded w-full"/>
                     </div>
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-3 rounded border border-blue-700" onClick={onSubmit}>Register</button>
                 </form>
-                <span>
-                    {showErrorEmail}
-                </span>
+                <span>{showErrorEmail}</span>
                 <br />
-                <span>
-                    {showErrorPassword}
-                </span>
+                <span>{showErrorPassword}</span>
                 <p>Already have an account? Click <Link className="font-bold hover:cursor hover:underline" to={"/login"}>here</Link> to sign in!</p>
             </div>
         </div>
