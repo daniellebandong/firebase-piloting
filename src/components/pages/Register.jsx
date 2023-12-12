@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { app } from "../../firebaseconfig";
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 //import AuthContext from "../../auth/AuthContext";
 
@@ -26,14 +27,15 @@ const RegisterForm = () => {
 
         if (!isEmailValid || email === '') {          
             setShowErrorEmail('Invalid email address');
-            console.log(setShowErrorEmail)
-            setEmail('')         
+            setEmail('')
+            console.log(showErrorEmail)         
           } 
         const [, domain] = email.split('@');
         if (!allowedDomains.includes(domain)) {
             
             setShowErrorEmail('Invalid email domain. Allowed domains are: ' + allowedDomains.join(', '));
-            setEmail('')           
+            setEmail('')  
+            console.log(showErrorEmail)         
             return;
         }
         
@@ -41,12 +43,14 @@ const RegisterForm = () => {
         if(!isValidPassword){
             setShowErrorEmail('')
             setShowErrorPassword('Invalid password')
+            console.log(showErrorPassword)
             setPassword('')
         }
         if (password !== confirmPassword) {
             setShowErrorEmail('');
             setShowErrorPassword('Passwords do not match!');
             setPassword('');
+            console.log(showErrorPassword)
             setConfirmPassword('');
             return;
         }
@@ -87,7 +91,7 @@ const RegisterForm = () => {
                     </div>
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-3 rounded border border-blue-700" onClick={onSubmit}>Register</button>
                 </form>
-                {showErrorEmail === ' ' || showErrorPassword === ' ' &&(
+                {(showErrorEmail === ' ' || showErrorPassword === ' ') &&(
                     <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
                         <span>{showErrorEmail}</span>
                         <br />

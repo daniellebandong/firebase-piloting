@@ -28,12 +28,9 @@ const InfoForm = () => {
                             .catch((error) => {
                                 console.error('Error fetching subscriber information', error);
                             });
-                    } else {
-                        alert('You are not authorized to access this resource');
-                        navigate('/login');
-                    }
+                    } 
                 } else {
-                    alert('You are not authenticated to access this resource');
+                    alert('You are not authorized to access this resource');
                     navigate('/login');
                 }
             });

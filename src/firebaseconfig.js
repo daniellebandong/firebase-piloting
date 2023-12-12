@@ -18,6 +18,7 @@ const firebaseConfig = {
   messagingSenderId: "1053709528927",
   appId: "1:1053709528927:web:76658667056c51117310ea",
   measurementId: "G-K2PKXM7MK2"
+
 };
 
 // Initialize Firebase
@@ -26,7 +27,7 @@ const db = getFirestore(app)
 const auth = getAuth(app)
 //importing and initialize appcheck with recaptcha
 const appCheck = initializeAppCheck(app,{
-  provider: new ReCaptchaV3Provider('6LcwWC4pAAAAAChXxNncLceONmYCkN1-2Imc9CwF')
+  provider: new ReCaptchaV3Provider('6LcwWC4pAAAAAChXxNncLceONmYCkN1-2Imc9CwF'),
 })
 
 export {db,app, auth, appCheck}
