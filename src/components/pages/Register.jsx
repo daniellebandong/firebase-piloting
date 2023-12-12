@@ -15,15 +15,17 @@ const RegisterForm = () => {
     const isValidPassword = passwordRegex.test(password)
     const isEmailValid = emailRegex.test(email);
     const navigate = useNavigate();
-    const [showErrorPassword, setShowErrorPassword] = useState(false);
-    const [showErrorEmail, setShowErrorEmail] = useState(false)
+    const [showErrorPassword, setShowErrorPassword] = useState('');
+    const [showErrorEmail, setShowErrorEmail] = useState(' ')
     const allowedDomains = ["gmail.com", "hotmail.com", "yahoo.com", "outlook.ca", "shaw.ca"];
 
     const onSubmit = async (e) =>{
         e.preventDefault()
         //email validation, NEED TO ADD VALIDATION FOR ONLY SPECIFIC DOMAINS
-        if (!isEmailValid || email === '') {           
+
+        if (!isEmailValid || email === '') {          
             setShowErrorEmail('Invalid email address');
+            console.log(setShowErrorEmail)
             setEmail('')         
           } 
         const [, domain] = email.split('@');
@@ -78,9 +80,14 @@ const RegisterForm = () => {
                     </div>
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-3 rounded border border-blue-700" onClick={onSubmit}>Register</button>
                 </form>
-                <span>{showErrorEmail}</span>
-                <br />
-                <span>{showErrorPassword}</span>
+                {showErrorEmail === ' ' || showErrorPassword === ' ' &&(
+                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+                        <span>{showErrorEmail}</span>
+                        <br />
+                        <span>{showErrorPassword}</span>
+                    </div>
+                )
+                }
                 <p>Already have an account? Click <Link className="font-bold hover:cursor hover:underline" to={"/login"}>here</Link> to sign in!</p>
             </div>
         </div>

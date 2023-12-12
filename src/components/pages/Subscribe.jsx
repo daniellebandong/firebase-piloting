@@ -76,30 +76,30 @@ const SubscribeForm =()=>{
             <footer className="my-20 p-1">
                 <aside className="font-bold">Want the first scoop on all the hockey action, sign up for our newsletter today!</aside>    
 
-                <form action="" class="space-y-4" onSubmit={handleSubmit}>
+                <form action="" className="space-y-4" onSubmit={handleSubmit}>
       <div>
-        <label for="firstName" class="block text-sm font-medium text-gray-600">First Name:</label>
+        <label for="firstName" className="block text-sm font-medium text-gray-600">First Name:</label>
         <input type="text" id="firstName" name="firstName" required
-               class="mt-1 p-2 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-300"/>
+               className="mt-1 p-2 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-300"/>
       </div>
 
       <div>
-        <label for="lastName" class="block text-sm font-medium text-gray-600">Last Name:</label>
+        <label for="lastName" className="block text-sm font-medium text-gray-600">Last Name:</label>
         <input type="text" id="lastName" name="lastName" required
-               class="mt-1 p-2 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-300"/>
+               className="mt-1 p-2 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-300"/>
       </div>
 
       <div>
-        <label for="address" class="block text-sm font-medium text-gray-600">Address:</label>
+        <label for="address" className="block text-sm font-medium text-gray-600">Address:</label>
         <textarea id="address" name="address" rows="4" required
-                  class="mt-1 p-2 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-300"></textarea>
+                  className="mt-1 p-2 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-300"></textarea>
       </div>
       <div>
-        <label for="dob" class="block text-sm font-medium text-gray-600">Date of Birth:</label>
+        <label for="dob" className="block text-sm font-medium text-gray-600">Date of Birth:</label>
         <input type="date" id="dob" name="dob" required
-               class="mt-1 p-2 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-300"/>
+               className="mt-1 p-2 border rounded-md w-full focus:outline-none focus:ring focus:border-blue-300"/>
       </div>
-      <button type="submit" class="bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300" >
+      <button type="submit" className="bg-blue-500 text-white font-bold py-2 px-4 rounded-md hover:bg-blue-700 focus:outline-none focus:ring focus:border-blue-300" >
         Submit
       </button>
     </form>
