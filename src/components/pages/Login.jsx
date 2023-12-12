@@ -57,7 +57,7 @@ const LoginForm = () => {
                             </div>
                         </div>
                     )}
-                <p>Don't have an account, click <Link className="hover:cursor hover:underline" to={"/register"}>here</Link> to register for one now!</p>
+                <p>Don't have an account, click <Link className="hover:cursor hover:underline" to={"/"}>here</Link> to register for one now!</p>
                 
             </form>
             </div>

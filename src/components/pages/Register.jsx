@@ -12,6 +12,7 @@ const RegisterForm = () => {
     const [password, setPassword] = useState('');
     const emailRegex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    const [confirmPassword, setConfirmPassword] = useState('');
     const isValidPassword = passwordRegex.test(password)
     const isEmailValid = emailRegex.test(email);
     const navigate = useNavigate();
@@ -42,7 +43,13 @@ const RegisterForm = () => {
             setShowErrorPassword('Invalid password')
             setPassword('')
         }
-
+        if (password !== confirmPassword) {
+            setShowErrorEmail('');
+            setShowErrorPassword('Passwords do not match!');
+            setPassword('');
+            setConfirmPassword('');
+            return;
+        }
         else{
             createUserWithEmailAndPassword(auth, email, password)
             .then(userCredential =>{
