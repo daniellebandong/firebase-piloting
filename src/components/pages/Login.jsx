@@ -47,7 +47,7 @@ const LoginForm = () => {
                 </div>
                 <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded border border-blue-700 my-1" onClick={onSubmit}>Login</button>
                 {/* error message div */}
-                {typeof isValid === "string" && (
+                {isValid === ' ' && (
                         <div role="alert">
                             <div className="bg-red-500 text-white font-bold rounded-t px-4 py-2">
                                 Warning

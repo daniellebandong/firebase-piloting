@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import {getAuth, onAuthStateChanged} from "firebase/auth"
+import {getAuth, onAuthStateChanged, signOut} from "firebase/auth"
 import { useNavigate } from 'react-router-dom';
 import { db } from "../../firebaseconfig";
 import { collection, addDoc, doc, setDoc } from "firebase/firestore";
@@ -55,10 +55,27 @@ const SubscribeForm =()=>{
     
         alert("Form submitted successfully!");
       };
+      const handleSignOut = async () => {
+        try {
+          await signOut(auth);
+          alert('Successfully signed out');
+          navigate('/login');
+        } catch (error) {
+          console.error('Error signing out:', error.message);
+        }
+      };
     
     return(
         <body>
-            <h1 className="text-2xl font-bold p-1">Hockey Players r Us Home</h1>
+          <div>
+          <h1 className="text-2xl font-bold p-1">Hockey Players r Us Home</h1>
+          <p>Hello {user ? user.displayName || user.email : "Guest"}</p>
+          <button
+            onClick={handleSignOut}
+            className="text-white p-2 bg-red-500 hover:bg-red-700 rounded-md">
+            Sign Out
+            </button>
+          </div>
             <div className="flex justify-center p-1">
                 <section>
                     <h2 className="font-bold">Oilers Cup or Bust Season</h2>
