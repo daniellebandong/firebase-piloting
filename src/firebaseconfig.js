@@ -3,7 +3,7 @@ import { initializeApp } from "firebase/app";
 import {getFirestore} from 'firebase/firestore'
 import { getAuth } from "firebase/auth";
 
-import { initializeAppCheck, ReCaptchaV3Provider } from "firebase/app-check";
+
 
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
@@ -26,8 +26,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app)
 const auth = getAuth(app)
 //importing and initialize appcheck with recaptcha
-const appCheck = initializeAppCheck(app,{
-  provider: new ReCaptchaV3Provider('6LcwWC4pAAAAAChXxNncLceONmYCkN1-2Imc9CwF'),
-})
 
-export {db,app, auth, appCheck}
+
+
+export {db,app, auth}

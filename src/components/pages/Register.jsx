@@ -28,14 +28,13 @@ const RegisterForm = () => {
         if (!isEmailValid || email === '') {          
             setShowErrorEmail('Invalid email address');
             setEmail('')
-            console.log(showErrorEmail)         
+        
           } 
         const [, domain] = email.split('@');
         if (!allowedDomains.includes(domain)) {
             
             setShowErrorEmail('Invalid email domain. Allowed domains are: ' + allowedDomains.join(', '));
-            setEmail('')  
-            console.log(showErrorEmail)         
+            setEmail('')        
             return;
         }
         
@@ -43,14 +42,12 @@ const RegisterForm = () => {
         if(!isValidPassword){
             setShowErrorEmail('')
             setShowErrorPassword('Invalid password')
-            console.log(showErrorPassword)
             setPassword('')
         }
         if (password !== confirmPassword) {
             setShowErrorEmail('');
             setShowErrorPassword('Passwords do not match!');
             setPassword('');
-            console.log(showErrorPassword)
             setConfirmPassword('');
             return;
         }
@@ -91,14 +88,9 @@ const RegisterForm = () => {
                     </div>
                     <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-3 rounded border border-blue-700" onClick={onSubmit}>Register</button>
                 </form>
-                {(showErrorEmail === ' ' || showErrorPassword === ' ') &&(
-                    <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
-                        <span>{showErrorEmail}</span>
-                        <br />
-                        <span>{showErrorPassword}</span>
-                    </div>
-                )
-                }
+                    <span className="text-red font-bold">{showErrorEmail}</span>
+                    <br />
+                    <span className="text-red font-bold">{showErrorPassword}</span>
                 <p>Already have an account? Click <Link className="font-bold hover:cursor hover:underline" to={"/login"}>here</Link> to sign in!</p>
             </div>
         </div>
